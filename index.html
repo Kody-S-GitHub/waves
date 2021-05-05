@@ -5,8 +5,8 @@
 		<link rel='stylesheet' href='main.css'>
 	</head>
 	<body onload='init()'>
-		<p id='attributes'>Crest: 125 Meters, Trough: -125 Meters</p>
-		<p id='current'>Current Height: 0 Meters, Current Time: 0, Phase: 0/360(0%)</p>
+		<p id='attributes'>Crest: 125 Meters, Trough: -125 Meters, Period: 1.44 Seconds</p>
+		<p id='current'>Current Height: 0 Meters, Current Time: 0, Phase: 0/360</p>
 		<div>
 			<div class='attribute'>
 				<p id='aDisplay'>Amplitude: 125 Meters</p>
@@ -19,6 +19,10 @@
 			<div class='attribute'>
 				<p>Slow Motion</p>
 				<input id='slowmo' type='checkbox' oninput='slow()'>
+			</div>
+			<div class='attribute'>
+				<p>Round Numbers</p>
+				<input type='checkbox' oninput='rounded()' checked>
 			</div>
 		</div>
 		<br>
