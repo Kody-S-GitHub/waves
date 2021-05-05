@@ -9,3 +9,7 @@ canvas {
 div {
 	display: inline-block;
 }
+
+body {
+	background: orange;	
+}
