@@ -94,11 +94,10 @@ function start()
 	} else
 	{
 		
-		percent = Math.floor(phase/360);
+		percent = Math.floor((phase/360) * 100);
 			
 	}
-	
-	document.getElementById('current').innerHTML = 'Current Height: ' + ((y - equilibrium) * -1) + ' Meters, Current Time: ' + time/100 + ', Phase: ' + phase + '/360(' + percent + '%)';
+	document.getElementById('current').innerHTML = 'Current Height: ' + Math.floor((y - equilibrium) * -1000)/1000 + ' Meters, Current Time: ' + time/100 + ', Phase: ' + phase + '/360(' + percent + '%)';
 	
 }
 
