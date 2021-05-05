@@ -98,7 +98,7 @@ function start()
 			
 	}
 	
-	document.getElementById('current').innerHTML = 'Current Height: ' + ((y - equilibrium) * -1) + ' Meters, Current Time: ' + time/100 + ', Phase: ' + phase + '/360(' + percent +'%);
+	document.getElementById('current').innerHTML = 'Current Height: ' + ((y - equilibrium) * -1) + ' Meters, Current Time: ' + time/100 + ', Phase: ' + phase + '/360(' + percent + '%)';
 	
 }
 
