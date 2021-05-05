@@ -19,4 +19,10 @@ body {
 
 .attribute {
 	text-align: center;
+	margin-left: 2px;
+	margin-right: 2px;
+}
+
+button {
+	margin-bottom: 5px;
 }
