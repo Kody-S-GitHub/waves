@@ -4,6 +4,7 @@ canvas {
 	padding: 0px;
 	margin: 0px;
 	display: grid;
+	border-color: black;
 }
 
 div {
@@ -11,5 +12,11 @@ div {
 }
 
 body {
-	background: orange;	
+	background: radial-gradient(#919592, #404240);
+	text-align: center;
+	color: #b8b7bd;
+}
+
+.attribute {
+	text-align: center;
 }
