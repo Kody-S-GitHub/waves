@@ -11,62 +11,96 @@ var waveLength = 10;
 var lines = [];
 
 
-function startTimer() {
+function startTimer()
+{
+
 	let wait;
-	if (slowmo) {
+	if (slowmo)
+	{
+	
 		wait = 100;
-	} else {
+		
+	} else
+	{
+	
 		wait = 10;
+		
 	}
-	timer = setInterval(function() {
+	
+	timer = setInterval(function()
+	{
+	
 		start();
+		
 	}, wait);
 }
 
-function endTimer() {
+function endTimer()
+{
+
 	clearInterval(timer);
+	
 }
 
-function init() {
+function init()
+{
+
 	canvas = document.getElementById('canvas');
 	canvas.width = window.innerWidth - 20;
 	equilibrium = canvas.height / 2;
 	last = equilibrium;
 	drawLine(0, equilibrium, canvas.width, equilibrium);
+	
 }
 
-function reset() {
+function reset()
+{
+
 	time = 0;
 	last = equilibrium;
 	endTimer();
 	amplitude = document.getElementById('amplitude').value;
 	frequency = document.getElementById('frequency').value / 4;
-	//speed = document.getElementById('speed').value / 2;
-	document.getElementById('display').innerHTML = 'Amplitude: ' + amplitude + ', Frequency: ' + frequency + 'Hz, Speed: ' + speed;
-	document.getElementById('attributes').innerHTML = 'Crest: ' + amplitude + ' Meters, Trough: -' + amplitude + ' Meters, Wave Length: ' + waveLength + ', Velocity: ' + (waveLength/frequency);
+	
+	document.getElementById('aDisplay').innerHTML = 'Amplitude: ' + amplitude + ' Meters';
+	document.getElementById('fDisplay').innerHTML = 'Frequency: ' + frequency + ' Hz';
+	document.getElementById('attributes').innerHTML = 'Crest: ' + amplitude + ' Meters, Trough: -' + amplitude + ' Meters';
+	
 }
 
-function wave() {
+function wave()
+{
+
 	let y = (Math.sin(time * (Math.PI/180) * frequency)) * amplitude + equilibrium;
 	return y;
+	
 }
 
-function start() {
+function start()
+{
+
 	var y = wave();
 	drawLine(time - (speed), last, time, y);
 	last = y;
 	time += speed;
+	
 	document.getElementById('current').innerHTML = 'Current Height: ' + ((y - equilibrium) * -1) + ' Meters, Current Time: ' + time/100 + ', Phase: ' + ((time*frequency)%360) + '/360';
+	
 }
 
-function drawLine(startX, startY, endX, endY) {
+function drawLine(startX, startY, endX, endY)
+{
+
 	let ctx = document.getElementById('canvas').getContext('2d');
 	ctx.moveTo(startX, startY);
 	ctx.lineTo(endX, endY);
 	ctx.stroke();
+	
 }
 
-function clearCanvas() {
+function clearCanvas()
+{
+
 	endTimer();
 	
 	document.getElementById('canvas').remove();
@@ -81,26 +115,36 @@ function clearCanvas() {
 	drawLine(0, equilibrium, canvas.width, equilibrium);
 	
 	document.getElementById('current').innerHTML = 'Current Height: 0 Meters, Current Time: 0, Phase: 0/360';
+	
 }
 
-function slow() {
-	if (timer != undefined) {
+function slow()
+{
+
+	if (timer != undefined)
+	{
+	
 		endTimer();
+		
 	}
 	
 	let input = document.getElementById('slowmo');
-	if (!slowmo) {
+	if (!slowmo)
+	{
+	
 		slowmo = true;
-	} else {
+		
+	} else
+	{
+	
 		slowmo = false;
+		
 	}
 		
-	if (timer != undefined) {
+	if (timer != undefined)
+	{
+	
 		startTimer();
+		
 	}
-}
-
-function calculateWaveLength() {
-	let lenght = (speed * 10)/frequency;
-	return 1;
 }
