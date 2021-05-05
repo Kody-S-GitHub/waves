@@ -84,7 +84,21 @@ function start()
 	last = y;
 	time += speed;
 	
-	document.getElementById('current').innerHTML = 'Current Height: ' + ((y - equilibrium) * -1) + ' Meters, Current Time: ' + time/100 + ', Phase: ' + Math.floor((time*frequency)%360) + '/360(' + ((time*frequency)%360 + 0.000001)/360) +'%);
+	let phase = (time*frequency)%360;
+	let percent;
+	if (phase == 0)
+	{
+		
+		percent = 0;
+		
+	} else
+	{
+		
+		percent = Math.floor(phase/360);
+			
+	}
+	
+	document.getElementById('current').innerHTML = 'Current Height: ' + ((y - equilibrium) * -1) + ' Meters, Current Time: ' + time/100 + ', Phase: ' + phase + '/360(' + percent +'%);
 	
 }
 
