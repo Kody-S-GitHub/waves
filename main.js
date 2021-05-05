@@ -84,7 +84,7 @@ function start()
 	last = y;
 	time += speed;
 	
-	document.getElementById('current').innerHTML = 'Current Height: ' + ((y - equilibrium) * -1) + ' Meters, Current Time: ' + time/100 + ', Phase: ' + ((time*frequency)%360) + '/360';
+	document.getElementById('current').innerHTML = 'Current Height: ' + ((y - equilibrium) * -1) + ' Meters, Current Time: ' + time/100 + ', Phase: ' + ((time*frequency)%360) + '/360(' + ((time*frequency)%360)/360) +'%);
 	
 }
 
