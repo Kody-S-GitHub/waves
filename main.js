@@ -84,7 +84,7 @@ function start()
 	last = y;
 	time += speed;
 	
-	document.getElementById('current').innerHTML = 'Current Height: ' + ((y - equilibrium) * -1) + ' Meters, Current Time: ' + time/100 + ', Phase: ' + ((time*frequency)%360) + '/360(' + ((time*frequency)%360)/360) +'%);
+	document.getElementById('current').innerHTML = 'Current Height: ' + ((y - equilibrium) * -1) + ' Meters, Current Time: ' + time/100 + ', Phase: ' + Math.floor((time*frequency)%360) + '/360(' + ((time*frequency)%360 + 0.000001)/360) +'%);
 	
 }
 
@@ -114,7 +114,7 @@ function clearCanvas()
 	time = 0;
 	drawLine(0, equilibrium, canvas.width, equilibrium);
 	
-	document.getElementById('current').innerHTML = 'Current Height: 0 Meters, Current Time: 0, Phase: 0/360';
+	document.getElementById('current').innerHTML = 'Current Height: 0 Meters, Current Time: 0, Phase: 0/360(0%)';
 	
 }
 
