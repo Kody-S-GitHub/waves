@@ -9,6 +9,7 @@ var timer;
 var slowmo = false;
 var waveLength = 10;
 var lines = [];
+var round = true;
 
 
 function startTimer()
@@ -18,7 +19,7 @@ function startTimer()
 	if (slowmo)
 	{
 	
-		wait = 100;
+		wait = 150;
 		
 	} else
 	{
@@ -64,7 +65,10 @@ function reset()
 	
 	document.getElementById('aDisplay').innerHTML = 'Amplitude: ' + amplitude + ' Meters';
 	document.getElementById('fDisplay').innerHTML = 'Frequency: ' + frequency + ' Hz';
-	document.getElementById('attributes').innerHTML = 'Crest: ' + amplitude + ' Meters, Trough: -' + amplitude + ' Meters';
+	let period;
+	if (round) { period = Math.floor((360*speed)/frequency)/100; }
+	else { period = ((360*speed)/frequency)/100 }
+	document.getElementById('attributes').innerHTML = 'Crest: ' + amplitude + ' Meters, Trough: -' + amplitude + ' Meters, Period: ' + period + ' Seconds';
 	
 }
 
@@ -97,7 +101,12 @@ function start()
 		percent = Math.floor((phase/360) * 100);
 			
 	}
-	document.getElementById('current').innerHTML = 'Current Height: ' + Math.floor((y - equilibrium) * -1000)/1000 + ' Meters, Current Time: ' + time/100 + ', Phase: ' + phase + '/360(' + percent + '%)';
+	
+	let height;
+	if (round) { height = Math.floor((y - equilibrium) * -1000)/1000; }
+	else { height = y - equilibrium * -1 }
+	
+	document.getElementById('current').innerHTML = 'Current Height: ' + height + ' Meters, Current Time: ' + time/100 + ' Seconds, Phase: ' + phase + '/360(' + percent + '%)';
 	
 }
 
@@ -160,4 +169,26 @@ function slow()
 		startTimer();
 		
 	}
+}
+
+function rounded()
+{
+
+	if (round)
+	{
+	
+		round = false;
+		
+	} else 
+	{
+	
+		round = true;
+	
+	}
+	
+	let period;
+	if (round) { period = Math.floor((360*speed)/frequency)/100; }
+	else { period = ((360*speed)/frequency)/100 }
+	document.getElementById('attributes').innerHTML = 'Crest: ' + amplitude + ' Meters, Trough: -' + amplitude + ' Meters, Period: ' + period + ' Seconds';
+
 }
