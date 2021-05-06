@@ -5,32 +5,60 @@
 		<link rel='stylesheet' href='main.css'>
 	</head>
 	<body onload='init()'>
-		<p id='attributes'>Crest: 125 Meters, Trough: -125 Meters, Period: 1.44 Seconds</p>
-		<p id='current'>Current Height: 0 Meters, Current Time: 0, Phase: 0/360</p>
+	
+		<p id='attributes'>Crest: 125 Cm, Trough: -125 Cm, Period: 1.44 Seconds</p>
+		<p id='current'>Current Height: 0 Cm, Current Time: 0, Phase: 0/360</p>
+		
 		<div>
+		
 			<div class='attribute'>
-				<p id='aDisplay'>Amplitude: 125 Meters</p>
+				<p id='aDisplay'>Amplitude: 125 Cm</p>
 				<input id='amplitude' type='range' min='1' max='250' value='125' oninput='reset()'>
 			</div>
+			
 			<div class='attribute'>
 				<p id='fDisplay'>Frequency: 2.5Hz</p>
 				<input id='frequency' type='range' min='1' max='20' value='10' oninput='reset()'>
 			</div>
+			
 			<div class='attribute'>
 				<p>Slow Motion</p>
 				<input id='slowmo' type='checkbox' oninput='slow()'>
 			</div>
+			
 			<div class='attribute'>
 				<p>Round Numbers</p>
 				<input type='checkbox' oninput='rounded()' checked>
 			</div>
+			
 		</div>
 		<br>
+		
 		<div>
 			<button onclick='startTimer()'>Run</button>
 			<button onclick='endTimer()'>Pause</button>
 			<button onclick='clearCanvas()'>Clear</button>
 		</div>
-		<canvas id='canvas' width='100' height='500'></canvas>
+		
+		<span id='canvasHolder'>
+			<canvas id='canvas' width='100' height='500'></canvas>
+		</span>
+		
+		<hr>
+		
+		<div>
+			<h1>More Information</h1>
+			<p style='width: 75%; margin: auto;'>This is the graph of a sine wave with x as time and y as the height (cm).</p>
+			
+			<h2>Functions</h2>
+			<span>
+				<p>Height: sin(time * (pi/180) * frequency) * amplitude. * (pi/180) is for the conversion from degrees to radians.</p>
+				<p>Phase: time%360 over 360. %(modulus) is the remainder operator.</p>
+				<p>Period: 360/frequency. Divide by 100 for seconds.</p>
+			</span>
+		</div>
+		
+		<!-- Spacing between ending of information and end of page -->
+		<br><br>
    </body>
 </html>
