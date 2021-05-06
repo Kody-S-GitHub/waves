@@ -26,3 +26,14 @@ body {
 button {
 	margin-bottom: 5px;
 }
+
+hr {
+	margin: 20px;
+	height: 5px;
+	border: none;
+	background: #b8b7bd;
+}
+
+span * {
+	margin: 3px;
+}
