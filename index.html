@@ -5,60 +5,57 @@
 		<link rel='stylesheet' href='main.css'>
 	</head>
 	<body onload='init()'>
+		<div id='main' style='margin-bottom: 0px;'>
 	
-		<p id='attributes'>Crest: 125 Cm, Trough: -125 Cm, Period: 1.44 Seconds</p>
-		<p id='current'>Current Height: 0 Cm, Current Time: 0, Phase: 0/360</p>
-		
-		<div>
-		
-			<div class='attribute'>
-				<p id='aDisplay'>Amplitude: 125 Cm</p>
-				<input id='amplitude' type='range' min='1' max='250' value='125' oninput='reset()'>
+			<p id='attributes'>Crest: 125 cm, Trough: -125 cm, Period: 0.8 Seconds</p>
+			<p id='current'>Current Height: 0 cm, Current Time: 0, Percent Done: 0%</p>
+
+			<div>
+
+				<div class='attribute'>
+					<p id='aDisplay'>Amplitude: 125 cm</p>
+					<input id='amplitude' type='range' min='1' max='250' value='125' oninput='reset()'>
+				</div>
+
+				<div class='attribute'>
+					<p id='fDisplay'>Frequency: 1.25Hz</p>
+					<input id='frequency' type='range' min='1' max='10' value='5' oninput='reset()'>
+				</div>
+
+				<div class='attribute'>
+					<p>Slow Motion</p>
+					<input id='slowmo' type='checkbox' oninput='slow()'>
+				</div>
+
+				<div class='attribute'>
+					<p>Round Numbers</p>
+					<input type='checkbox' oninput='rounded()' checked>
+				</div>
+
 			</div>
-			
-			<div class='attribute'>
-				<p id='fDisplay'>Frequency: 2.5Hz</p>
-				<input id='frequency' type='range' min='1' max='20' value='10' oninput='reset()'>
+			<br>
+
+			<div>
+				<button onclick='runpause(true)' id='run/pause'>Run</button>
+				<button onclick='clearCanvas()'>Clear</button>
 			</div>
-			
-			<div class='attribute'>
-				<p>Slow Motion</p>
-				<input id='slowmo' type='checkbox' oninput='slow()'>
-			</div>
-			
-			<div class='attribute'>
-				<p>Round Numbers</p>
-				<input type='checkbox' oninput='rounded()' checked>
-			</div>
+
+			<span id='canvasHolder'>
+				<canvas id='canvas' width='100' height='500'></canvas>
+			</span>
 			
 		</div>
-		<br>
-		
-		<div>
-			<button onclick='startTimer()'>Run</button>
-			<button onclick='endTimer()'>Pause</button>
-			<button onclick='clearCanvas()'>Clear</button>
-		</div>
-		
-		<span id='canvasHolder'>
-			<canvas id='canvas' width='100' height='500'></canvas>
-		</span>
 		
 		<hr>
 		
-		<div>
-			<h1>More Information</h1>
-			<p style='width: 75%; margin: auto;'>This is the graph of a sine wave with x as time and y as the height (cm).</p>
-			
-			<h2>Functions</h2>
-			<span>
-				<p>Height: sin(time * (pi/180) * frequency) * amplitude. * (pi/180) is for the conversion from degrees to radians.</p>
-				<p>Phase: time%360 over 360. %(modulus) is the remainder operator.</p>
-				<p>Period: 360/frequency. Divide by 100 for seconds. (Online sources say it is 1/frequency, however I have found this formula to predict the exact time the wave finishes its cycle. My guess is because this is a computer version of a wave whereas those sources are for the pyhsics of actual waves.)</p>
-			</span>
+		<!-- Ligo -->
+		<div id='statement' class='animate' style='margin-top: 0px;'>
+			<h1>Artist Statement</h1>
+			<p><big>Mouse here!</big></p>
+			<div id='content'>
+				<h3><span class='notbold'>The art that I chose to do was a website. This website can graph a wave from a given amplitude (distance from crest or trough to the equilibrium) and frequency (rate at which the wave oscillates). The wave is a sine wave(sine is a mathematical function that relates the hypotenuse of a triangle to the opposite side). This is meant to show how the amplitude and frequency can change how the resulting wave will appear. My wave project and gravitational waves are similar as both contain the same properties (amplitude, frequency, period, ect.)</span></h3>
+			</div>
 		</div>
-		
-		<!-- Spacing between ending of information and end of page -->
-		<br><br>
+	<br>
    </body>
 </html>
