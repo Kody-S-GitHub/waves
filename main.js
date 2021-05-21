@@ -1,15 +1,14 @@
-var amplitude = 125;
-var time = 0;
-var frequency = 2.5;
-var speed = 1;
+var amplitude = 125; // in [cm]
+var time = 0; // in [ms]
+var frequency = 1.25; // in [Hz] => [1/sec]
+var speed = 1; // in [ms]
 var equilibrium;
 var last;
 var canvas;
 var timer;
 var slowmo = false;
-var waveLength = 10;
-var lines = [];
 var round = true;
+var wait = 25;
 
 
 function startTimer()
@@ -18,19 +17,6 @@ function startTimer()
 	if (timer == undefined) 
 	{
 	
-		let wait;
-		if (slowmo)
-		{
-
-			wait = 125;
-
-		} else
-		{
-
-			wait = 10;
-
-		}
-
 		timer = setInterval(function()
 		{
 
@@ -60,6 +46,31 @@ function init()
 	
 }
 
+function runpause(run)
+{
+
+	let button = document.getElementById('run/pause');
+
+	if (run == true)
+	{	
+	
+		startTimer();
+		button.innerHTML = 'Pause';
+		button.onclick = function() { runpause(false); }
+	
+	}
+		
+	else
+	
+	{
+		endTimer();
+		button.innerHTML = 'Run';
+		button.onclick = function() { runpause(true); }
+		
+	}
+
+}
+
 function reset()
 {
 
@@ -69,31 +80,35 @@ function reset()
 	amplitude = document.getElementById('amplitude').value;
 	frequency = document.getElementById('frequency').value / 4;
 	
-	document.getElementById('aDisplay').innerHTML = 'Amplitude: ' + amplitude + ' Cm';
+	document.getElementById('aDisplay').innerHTML = 'Amplitude: ' + amplitude + ' cm';
 	document.getElementById('fDisplay').innerHTML = 'Frequency: ' + frequency + ' Hz';
 	let period;
-	if (round) { period = Math.floor((360*speed)/frequency)/100; }
-	else { period = ((360*speed)/frequency)/100 }
-	document.getElementById('attributes').innerHTML = 'Crest: ' + amplitude + ' Cm, Trough: -' + amplitude + ' Cm, Period: ' + period + ' Seconds';
+	if (round) { period = Math.floor((1/frequency)*100) / 100; }
+	else { period = 1/frequency; }
+	document.getElementById('attributes').innerHTML = 'Crest: ' + amplitude + ' cm, Trough: -' + amplitude + ' cm, Period: ' + period + ' seconds';
+	
+	runpause(false);
 	
 }
 
 function sineWave()
 {
 
-	return (Math.sin(time * (Math.PI/180) * frequency)) * amplitude + equilibrium;
+	let pi2 = Math.PI * 2;
+	let time_sec = time/100; // convert ms to sec !!!
+	return (Math.sin(time_sec * frequency * pi2)) * amplitude + equilibrium;
 	
 }
 
 function start()
 {
 
-	var y = sineWave();
+	var y = sineWave(time,frequency);
 	drawLine(time - (speed), last, time, y);
 	last = y;
 	time += speed;
 	
-	let phase = ((time*frequency)%360).toFixed(2);
+	let phase = ((time / 100) * frequency).toFixed(2);
 	let percent;
 	if (phase == 0)
 	{
@@ -103,15 +118,15 @@ function start()
 	} else
 	{
 		
-		percent = Math.floor((phase/360) * 100);
+		percent = Math.floor((phase) * 100)%100;
 			
 	}
 	
 	let height;
 	if (round) { height = (Math.floor((y - equilibrium) * -1000)/1000).toFixed(3); }
 	else { height = y - equilibrium * -1 }
-	
-	document.getElementById('current').innerHTML = 'Current Height: ' + height + ' Cm, Current Time: ' + (time/100).toFixed(2) + ' Seconds, Phase: ' + phase + '/360(' + percent + '%)';
+	let period = 1/frequency;
+	document.getElementById('current').innerHTML = 'Current Height: ' + height + ' cm, Current Time: ' + (time/100) + ' seconds, Percent Done: ' + percent + '%';
 	
 }
 
@@ -141,29 +156,37 @@ function clearCanvas()
 	time = 0;
 	drawLine(0, equilibrium, canvas.width, equilibrium);
 	
-	document.getElementById('current').innerHTML = 'Current Height: 0 Cm, Current Time: 0, Phase: 0/360(0%)';
+	document.getElementById('current').innerHTML = 'Current Height: 0 cm, Current Time: 0, Percent Done: 0%';
+	
+	runpause(false);
 	
 }
 
 function slow()
 {
-
-	endTimer();
 	
 	let input = document.getElementById('slowmo');
 	if (!slowmo)
 	{
 	
 		slowmo = true;
+		wait = 150;
 		
 	} else
 	{
 	
 		slowmo = false;
+		wait = 25;
 		
 	}
-		
-	startTimer();
+	
+	if (timer != undefined)
+	{
+	
+		endTimer();
+		startTimer();
+	
+	}
 		
 }
 
@@ -183,8 +206,8 @@ function rounded()
 	}
 	
 	let period;
-	if (round) { period = Math.floor((360*speed)/frequency)/100; }
-	else { period = ((360*speed)/frequency)/100 }
-	document.getElementById('attributes').innerHTML = 'Crest: ' + amplitude + ' Cm, Trough: -' + amplitude + ' Cm, Period: ' + period + ' Seconds';
+	if (round) { period = Math.floor((1/frequency)*100) / 100; }
+	else { period = 1/frequency; }
+	document.getElementById('attributes').innerHTML = 'Crest: ' + amplitude + ' cm, Trough: -' + amplitude + ' cm, Period: ' + period + ' seconds';
 
 }
