@@ -124,7 +124,7 @@ function start()
 	
 	let height;
 	if (round) { height = (Math.floor((y - equilibrium) * -1000)/1000).toFixed(3); }
-	else { height = y - equilibrium * -1 }
+	else { height = (y - equilibrium) * -1 }
 	let period = 1/frequency;
 	document.getElementById('current').innerHTML = 'Current Height: ' + height + ' cm, Current Time: ' + (time/100) + ' seconds, Percent Done: ' + percent + '%';
 	
