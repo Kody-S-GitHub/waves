@@ -37,3 +37,25 @@ hr {
 span * {
 	margin: 3px;
 }
+
+.notbold {
+	font-weight: normal;
+}
+
+
+
+/* Ligo fade in and out animation */
+#content {
+	width: 100%;
+	opacity: 0;
+	transition: 1s;
+}
+
+#statement {
+	width: 100%;
+}
+
+.animate:hover > #content {
+	opacity: 1;
+	transition: 3s;
+}
